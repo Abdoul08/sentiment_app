@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #E66C37;">
+  <div class="container-fluid">
+    <a class="navbar-brand" >Sentiment App</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+          <a class="nav-link" routerLink="/">Connexion</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <a class="nav-link" routerLink="/results">Résultats</a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn()">
+          <a class="nav-link" (click)="logout()">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Détails de l'analyse de sentiment</h2>
+  <div class="card">
+      <div class="card-body">
+          <h5 class="card-title">{{ title }}</h5>
+          <div class="mb-3">
+              <strong>Channel Name:</strong> {{ channelName }}
+          </div>
+          <div class="mb-3">
+              <strong>Video ID:</strong> {{ videoId }}
+          </div>
+          <div class="mb-3">
+              <strong>Transcription:</strong> {{ transcription }}
+          </div>
+          <div class="mb-3">
+              <strong>Sentiment:</strong> {{ sentiment }}
+          </div>
+          <div class="mb-3">
+              <strong>Sentiment Score:</strong> {{ sentimentScore }}%
+          </div>
+          <div class="text-center mb-3">
+              <a class="btn btn-primary" href="{{ videoLink }}" target="_blank">Regarder la vidéo</a>
+          </div>
+          <div class="text-center">
+              <button class="btn btn-secondary" routerLink="/results">Retour</button>
+          </div>
+      </div>
+  </div>
+</div>
