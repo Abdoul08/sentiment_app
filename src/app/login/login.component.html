@@ -1,21 +1,33 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-12 col-sm-8 col-md-6">
-      <h2 class="text-center mb-4">Connexion</h2>
-      <form (ngSubmit)="onLogin()">
-        <div class="form-group mb-3">
+      <h2 class="text-center mb-4" style="color: #E66C37; font-weight: bold;">Connexion</h2>
+      <form (ngSubmit)="onLogin()" class="card border p-4 rounded shadow hover-card" style="background-color: #ffffff;">
+        <div class="form-group mb-4">
           <label for="email" class="form-label">Email</label>
-          <input type="email" [(ngModel)]="username" name="username" class="form-control" placeholder="Entrez votre email" required>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-envelope" style="color: #E66C37;"></i></span>
+            <input type="email" [(ngModel)]="username" name="username" class="form-control" placeholder="Entrez votre email" required style="border: 1px solid #E66C37;">
+          </div>
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group mb-4">
           <label for="password" class="form-label">Mot de passe</label>
-          <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Mot de passe" required>
+          <div class="input-group">
+            <span class="input-group-text bg-light"><i class="bi bi-lock" style="color: #E66C37;"></i></span>
+            <input [type]="passwordFieldType" [(ngModel)]="password" name="password" class="form-control" placeholder="Mot de passe" required style="border: 1px solid #E66C37;">
+            <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+              <i class="bi" [ngClass]="{'bi-eye': passwordFieldType === 'password', 'bi-eye-slash': passwordFieldType === 'text'}"></i>
+            </button>
+          </div>
         </div>
         <div *ngIf="loginError" class="alert alert-danger text-center">
           {{ loginError }}
         </div>
-        <button type="submit" class="btn btn-outline-dark">Se connecter</button>
+        <div class="text-center">
+          <button type="submit" class="btn btn-outline-dark" style="width: 150px; border-radius: 30px;">Se connecter</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
+

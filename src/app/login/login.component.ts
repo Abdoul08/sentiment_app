@@ -11,7 +11,12 @@ export class LoginComponent {
   username = '';
   password = '';
   loginError = '';
+  passwordFieldType: string = 'password'; // Initialise le mot de passe à "caché"
 
+  // Fonction pour basculer la visibilité du mot de passe
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {

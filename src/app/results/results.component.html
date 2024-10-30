@@ -1,82 +1,88 @@
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Résultats de l'analyse de sentiment des vidéos YouTube</h2>
-  
-    <!-- Barre de sélection pour filtrer par sentiment et par chaîne -->
-    <div class="d-flex justify-content-between mb-3">
-      <!-- Filtre de sentiment -->
-      <div class="input-group me-2">
-        <select class="form-select" [(ngModel)]="selectedSentiment" (change)="filterResults()">
-          <option value="">Tous les sentiments</option>
-          <option value="POSITIVE">Positif</option>
-          <option value="NEUTRAL">Neutre</option>
-          <option value="NEGATIVE">Négatif</option>
-          <option value="MIXED">Mixte</option>
-        </select>
-      </div>
-  
-      <!-- Filtre de chaîne -->
-      <div class="input-group">
-        <select class="form-select" [(ngModel)]="selectedChannel" (change)="filterResults()">
-          <option value="">Toutes les chaînes</option>
-          <option value="FRANCE 24">FRANCE 24</option>
-          <option value="Nat Geo France">Nat Geo France</option>
+  <h2 class="text-center mb-4">Résultats de l'analyse de sentiment des vidéos YouTube</h2>
 
-        </select>
-      </div>
+  <!-- Barre de sélection pour filtrer par sentiment et par chaîne -->
+  <div class="d-flex justify-content-between mb-4 align-items-center">
+    <!-- Filtre de sentiment -->
+    <div class="input-group me-3" style="max-width: 250px;">
+      <label class="input-group-text">Filtrer par sentiment:</label>
+      <select class="form-select" [(ngModel)]="selectedSentiment" (change)="filterResults()">
+        <option value="">Tous les sentiments</option>
+        <option value="POSITIVE">Positif</option>
+        <option value="NEUTRAL">Neutre</option>
+        <option value="NEGATIVE">Négatif</option>
+        <option value="MIXED">Mixte</option>
+      </select>
     </div>
-  
-    <div class="card">
-      <div class="card-body">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Chaîne</th>
-              <th scope="col">Titre</th>
-              <th scope="col">Sentiment</th>
-              <th scope="col">Détails</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Affichage des éléments de la page courante uniquement, avec filtre appliqué -->
-            <ng-container *ngFor="let apiItem of paginatedData(); let i = index">
-              <tr *ngIf="i > 0">
-                <td *ngIf="apiItem.Data[0]">{{ apiItem.Data[0].VarCharValue }}</td>
-                <td *ngIf="apiItem.Data[2]">{{ apiItem.Data[2].VarCharValue }}</td>
-  
-                <td *ngIf="apiItem.Data[6]">
-                  <span
-                    [ngClass]="{
-                      'badge bg-success': apiItem.Data[6].VarCharValue === 'POSITIVE',
-                      'badge bg-warning text-dark': apiItem.Data[6].VarCharValue === 'NEUTRAL',
-                      'badge bg-danger': apiItem.Data[6].VarCharValue === 'NEGATIVE',
-                      'badge bg-info text-dark': apiItem.Data[6].VarCharValue === 'MIXED'
-                    }">
-                    {{ apiItem.Data[6].VarCharValue }}
-                  </span>
-                </td>
-  
-                <td>
-                  <button class="btn btn-primary" routerLink="/details">Détails</button>
-                </td>
-              </tr>
-            </ng-container>
-          </tbody>
-        </table>
-      </div>
+
+    <!-- Filtre de chaîne -->
+    <div class="input-group" style="max-width: 250px;">
+      <label class="input-group-text">Filtrer par chaîne:</label>
+      <select class="form-select" [(ngModel)]="selectedChannel" (change)="filterResults()">
+        <option value="">Toutes les chaînes</option>
+        <option value="FRANCE 24">FRANCE 24</option>
+        <option value="Nat Geo France">Nat Geo France</option>
+      </select>
     </div>
-  
-    <nav>
-      <ul class="pagination justify-content-center mt-4">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <a class="page-link" (click)="goToPage(currentPage - 1)">Précédent</a>
-        </li>
-        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
-          <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
-        </li>
-        <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <a class="page-link" (click)="goToPage(currentPage + 1)">Suivant</a>
-        </li>
-      </ul>
-    </nav>
   </div>
-  
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-striped align-middle">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Chaîne</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Sentiment</th>
+            <th scope="col" class="text-center">Vidéo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Affichage des éléments de la page courante uniquement, avec filtre appliqué -->
+          <ng-container *ngFor="let apiItem of paginatedData(); let i = index">
+            <tr *ngIf="i > 0">
+              <td *ngIf="apiItem.Data[0]">{{ apiItem.Data[0].VarCharValue }}</td>
+              <td *ngIf="apiItem.Data[2]" style="max-width: 400px; overflow: hidden; text-overflow: ellipsis;">
+                {{ apiItem.Data[2].VarCharValue }}
+              </td>
+              <td *ngIf="apiItem.Data[6]">
+                <span
+                  [ngClass]="{
+                    'badge bg-success': apiItem.Data[6].VarCharValue === 'POSITIVE',
+                    'badge bg-warning text-dark': apiItem.Data[6].VarCharValue === 'NEUTRAL',
+                    'badge bg-danger': apiItem.Data[6].VarCharValue === 'NEGATIVE',
+                    'badge bg-info text-dark': apiItem.Data[6].VarCharValue === 'MIXED'
+                  }">
+                  {{ apiItem.Data[6].VarCharValue }}
+                </span>
+              </td>
+
+              <!-- Icône de lien vers la vidéo -->
+              <td class="text-center">
+                <a [href]="apiItem.Data[4].VarCharValue" target="_blank" class="btn btn-danger btn-sm">
+  <i class="bi bi-youtube"></i> Voir la vidéo
+</a>
+
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <nav>
+    <ul class="pagination justify-content-center mt-4">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="goToPage(currentPage - 1)">Précédent</a>
+      </li>
+      <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+        <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="goToPage(currentPage + 1)">Suivant</a>
+      </li>
+    </ul>
+  </nav>
+</div>

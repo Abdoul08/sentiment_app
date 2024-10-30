@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+.navbar {
+    transition: background-color 0.3s ease;
+  }
+  
+  .navbar:hover {
+    background-color: #D55A30; /* Couleur un peu plus sombre au survol */
+  }
+  
+  .nav-link {
+    font-size: 18px;
+    padding: 10px 15px;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Légère surbrillance au survol */
+    border-radius: 5px; /* Coins arrondis pour les liens */
+  }
+
+  .container {
+    max-width: 600px; /* Limite la largeur pour le formulaire */
+    margin-top: 100px; /* Espacement supérieur pour mieux centrer verticalement */
+  }
+  
+  .form-control {
+    border: 1px solid #E66C37; /* Bordure personnalisée */
+    transition: border-color 0.3s ease; /* Transition douce pour la bordure */
+  }
+  
+  .form-control:focus {
+    border-color: #E66C37; /* Bordure verte au focus */
+    box-shadow: 0 0 5px rgba(230, 108, 55, 0.5); /* Ombre au focus */
+  }
+  
+  .alert {
+    margin-top: 15px; /* Espacement pour l'alerte */
+  }
+  
+  .hover-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  

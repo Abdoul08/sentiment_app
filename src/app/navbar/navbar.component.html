@@ -1,16 +1,19 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #E66C37;">
+<nav class="navbar navbar-expand-lg" style="background-color: #E66C37; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
   <div class="container-fluid">
-    <a class="navbar-brand" >Sentiment App</a>
-    <div class="collapse navbar-collapse">
+    <a class="navbar-brand text-white" style="font-weight: bold; font-size: 24px;">Sentiment App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" *ngIf="!authService.isLoggedIn()">
-          <a class="nav-link" routerLink="/">Connexion</a>
+          <a class="nav-link text-white" routerLink="/">Connexion</a>
         </li>
         <li class="nav-item" *ngIf="authService.isLoggedIn()">
-          <a class="nav-link" routerLink="/results">Résultats</a>
+          <a class="nav-link text-white" routerLink="/results">Résultats</a>
         </li>
         <li class="nav-item" *ngIf="authService.isLoggedIn()">
-          <a class="nav-link" (click)="logout()">Déconnexion</a>
+          <a class="nav-link text-white" (click)="logout()">Déconnexion</a>
         </li>
       </ul>
     </div>
